@@ -1,7 +1,7 @@
 import type { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'com.atla.desigualdometro',
+  appId: 'com.desigualdometro.app',
   appName: 'desigualdometro',
   webDir: 'www'
 };
