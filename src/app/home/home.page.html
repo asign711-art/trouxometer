@@ -1,0 +1,128 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="danger">
+    <ion-title>Trouxômetro</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar color="danger">
+      <ion-title size="large">Trouxômetro</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div class="subtitle">
+    <p>Comparativo de remuneração: setor público vs. privado</p>
+    <div class="legend">
+      <span class="legend-item">
+        <span class="legend-color salario"></span> Salário
+      </span>
+      <span class="legend-item">
+        <span class="legend-color auxilios"></span> Auxílios
+      </span>
+    </div>
+  </div>
+
+  <!-- SETOR PÚBLICO -->
+  <div class="section-header publico">
+    <span>Setor Público / Político</span>
+  </div>
+
+  @for (cargo of cargos; track cargo.cargo) {
+    @if (cargo.setor === 'publico') {
+      <div class="cargo-card">
+        <div class="cargo-info">
+          <span class="cargo-nome-wrap">
+            <span class="cargo-nome">{{ cargo.cargo }}</span>
+            <span class="cargo-pessoas">{{ formatPessoas(cargo.pessoas) }} pessoas</span>
+          </span>
+          <span class="cargo-total">{{ formatCurrency(getTotal(cargo)) }}</span>
+        </div>
+        <div class="bar-container">
+          <div class="bar-track">
+            <div class="bar-fill" [style.width.%]="getBarWidth(cargo)">
+              <div class="bar-segment salario" [style.width.%]="getSalarioWidth(cargo)">
+                @if (labelFits(cargo, 'salario')) {
+                  <span class="bar-label">{{ formatCurrency(cargo.salario) }}</span>
+                }
+              </div>
+              <div class="bar-segment auxilios" [style.width.%]="getAuxiliosWidth(cargo)">
+                @if (labelFits(cargo, 'auxilios')) {
+                  <span class="bar-label">{{ formatCurrency(cargo.auxilios) }}</span>
+                }
+              </div>
+            </div>
+          </div>
+        </div>
+        @if (!labelFits(cargo, 'salario') || !labelFits(cargo, 'auxilios')) {
+          <div class="cargo-detail">
+            @if (!labelFits(cargo, 'salario')) {
+              <span class="detail-salario">Salário: {{ formatCurrency(cargo.salario) }}</span>
+            }
+            @if (!labelFits(cargo, 'auxilios')) {
+              <span class="detail-auxilios" [style.margin-left.%]="getAuxiliosStart(cargo)">Auxílios: {{ formatCurrency(cargo.auxilios) }}</span>
+            }
+          </div>
+        }
+      </div>
+    }
+  }
+
+  <!-- SETOR PRIVADO -->
+  <div class="section-header privado">
+    <span>Setor Privado</span>
+  </div>
+
+  @for (cargo of cargos; track cargo.cargo) {
+    @if (cargo.setor === 'privado') {
+      <div class="cargo-card">
+        <div class="cargo-info">
+          <span class="cargo-nome-wrap">
+            <span class="cargo-nome">{{ cargo.cargo }}</span>
+            <span class="cargo-pessoas">{{ formatPessoas(cargo.pessoas) }} pessoas</span>
+          </span>
+          <span class="cargo-total">{{ formatCurrency(getTotal(cargo)) }}</span>
+        </div>
+        <div class="bar-container">
+          <div class="bar-track">
+            <div class="bar-fill" [style.width.%]="getBarWidth(cargo)">
+              <div class="bar-segment salario" [style.width.%]="getSalarioWidth(cargo)">
+                @if (labelFits(cargo, 'salario')) {
+                  <span class="bar-label">{{ formatCurrency(cargo.salario) }}</span>
+                }
+              </div>
+              <div class="bar-segment auxilios" [style.width.%]="getAuxiliosWidth(cargo)">
+                @if (cargo.auxilios > 0 && labelFits(cargo, 'auxilios')) {
+                  <span class="bar-label">{{ formatCurrency(cargo.auxilios) }}</span>
+                }
+              </div>
+            </div>
+          </div>
+        </div>
+        @if (!labelFits(cargo, 'salario') || (cargo.auxilios > 0 && !labelFits(cargo, 'auxilios'))) {
+          <div class="cargo-detail">
+            @if (!labelFits(cargo, 'salario')) {
+              <span class="detail-salario">Salário: {{ formatCurrency(cargo.salario) }}</span>
+            }
+            @if (cargo.auxilios > 0 && !labelFits(cargo, 'auxilios')) {
+              <span class="detail-auxilios" [style.margin-left.%]="getAuxiliosStart(cargo)">Auxílios: {{ formatCurrency(cargo.auxilios) }}</span>
+            }
+          </div>
+        }
+      </div>
+    }
+  }
+
+  <div class="footer-note">
+    <p>* Valores aproximados para fins de comparação. Auxílios incluem penduricalhos: verbas indenizatórias, auxílio-moradia, auxílio-alimentação (até R$ 4.184/mês), auxílio-saúde (até R$ 11.601/mês), férias vendidas, licença compensatória, honorários de sucumbência, entre outros ~60 tipos de benefícios. Custo total dos penduricalhos: R$ 50 bi/ano.</p>
+
+    <p class="fontes-titulo">Fontes:</p>
+    <ul class="fontes-lista">
+      <li><a href="https://g1.globo.com/economia/noticia/2026/02/25/5-dos-penduricalhos-mais-inacreditaveis-do-funcionalismo-brasileiro.ghtml" target="_blank" rel="noopener">G1 — 5 dos penduricalhos mais inacreditáveis do funcionalismo brasileiro</a></li>
+      <li><a href="https://asmetro.org.br/portalsn/2026/02/07/o-que-e-o-imperio-dos-penduricalhos/" target="_blank" rel="noopener">ASMETRO — O que é o império dos penduricalhos</a></li>
+      <li><a href="https://www.terra.com.br/noticias/brasil/5-dos-penduricalhos-mais-inacreditaveis-do-funcionalismo-brasileiro,376ac9e6d9aad0fd1bb09a917edadb55jm4cvb89.html" target="_blank" rel="noopener">Terra — 5 dos penduricalhos mais inacreditáveis do funcionalismo</a></li>
+      <li><a href="https://www.brasildefato.com.br/2026/02/26/stf-adia-julgamento-dos-penduricalhos-para-marco-entenda-o-que-esta-em-jogo/" target="_blank" rel="noopener">Brasil de Fato — STF adia julgamento dos penduricalhos</a></li>
+      <li><a href="https://www.ocafezinho.com/2026/02/25/extra-de-juizes-chega-a-17-vezes-a-renda-media-do-brasileiro/" target="_blank" rel="noopener">O Cafezinho — Extra de juízes chega a 17x a renda média do brasileiro</a></li>
+    </ul>
+  </div>
+</ion-content>

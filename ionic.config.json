@@ -1,0 +1,7 @@
+{
+  "name": "desigualdometro",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
