@@ -45,6 +45,7 @@ Acesse `http://localhost:8100`
 - [Terra — 5 dos penduricalhos mais inacreditáveis do funcionalismo](https://www.terra.com.br/noticias/brasil/5-dos-penduricalhos-mais-inacreditaveis-do-funcionalismo-brasileiro,376ac9e6d9aad0fd1bb09a917edadb55jm4cvb89.html)
 - [Brasil de Fato — STF adia julgamento dos penduricalhos](https://www.brasildefato.com.br/2026/02/26/stf-adia-julgamento-dos-penduricalhos-para-marco-entenda-o-que-esta-em-jogo/)
 - [O Cafezinho — Extra de juízes chega a 17x a renda média do brasileiro](https://www.ocafezinho.com/2026/02/25/extra-de-juizes-chega-a-17-vezes-a-renda-media-do-brasileiro/)
+- [TV Cultura — "Estrutura de exceções para juízes é absurda", diz Bianca Santana sobre "penduricalhos"](https://www.youtube.com/watch?v=1b9zZHrr1dA)
 
 ## Próximos passos
 
